@@ -1,4 +1,6 @@
 import { auth } from "./firebase-config.js";
+import { sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
 import {
     createUserWithEmailAndPassword,
     sendEmailVerification,
@@ -197,6 +199,36 @@ window.loginUser = async function () {
         console.error("Error logging in:", error);
         showMessage(error.message);
     }
+};
+
+window.forgotPassword = function () {
+    document.getElementById("forgotEmail").value = "";
+    document.getElementById("forgotPasswordModal").style.display = "block";
+};
+
+// Close the modal
+window.closeForgotModal = function () {
+    document.getElementById("forgotPasswordModal").style.display = "none";
+};
+
+// Send the reset email
+window.sendResetEmail = function () {
+    const email = document.getElementById("forgotEmail").value;
+
+    if (!email) {
+        showMessage("Please enter an email address.", "error");
+        return;
+    }
+
+    sendPasswordResetEmail(auth, email)
+        .then(() => {
+            showMessage("Password reset email sent!", "success");
+            closeForgotModal();
+        })
+        .catch((error) => {
+            console.error("Reset email error:", error);
+            showMessage(error.message, "error");
+        });
 };
 
 

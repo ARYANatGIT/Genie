@@ -28,8 +28,21 @@
             <input type="name" id="loginName" placeholder="Enter your name">
             <input type="email" id="loginEmail" placeholder="Enter your email">
             <input type="password" id="loginPassword" placeholder="Enter your password">
+            <p class="forgot-password">
+                <a href="#" onclick="forgotPassword()">Forgot Password?</a>
+            </p>
             <button onclick="loginUser()">Login</button>
         </div>
+
+        <div id="forgotPasswordModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeForgotModal()">&times;</span>
+                <h3>Reset Password</h3>
+                <input type="email" id="forgotEmail" placeholder="Enter your email" />
+                <button onclick="sendResetEmail()">Send Reset Link</button>
+            </div>
+        </div>
+
 
         <div id="signUpDiv" class="form-container">
             <h3>Sign Up</h3>
