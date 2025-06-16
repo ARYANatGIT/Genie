@@ -56,7 +56,7 @@ confirmDeleteBtn.addEventListener("click", async () => {
         messageBox.style.display = "block";
 
         setTimeout(() => {
-            window.location.href = "index.html";
+            window.location.href = "/";
         }, 1500);
     } catch (error) {
         console.error("Error deleting account:", error);
@@ -67,7 +67,7 @@ confirmDeleteBtn.addEventListener("click", async () => {
 });
 
 noBtn.addEventListener("click", () => {
-    window.location.href = "index.html";
+    window.location.href = "/";
 });
 
 
