@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Genie | Website Team</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='website_team.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@400;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" href="{{url_for('static',filename='images/Untitled design.png')}}">
+</head>
+
+<body>
+
+    <!-- Golden Background Glows -->
+    <div class="golden-glow top-left"></div>
+    <div class="golden-glow bottom-right"></div>
+
+    <!-- header -->
+    <header class="glass-header">
+        <div class="logo-container">
+            <img src="{{url_for('static',filename='images/Untitled design.png')}}" alt="Genie Logo" class="logo">
+            <span class="company-name">Genie</span>
+        </div>
+
+        <nav class="main-nav">
+            <a href="/">Home</a>
+            <a href="#" class="active">Website Team</a>
+        </nav>
+
+        <div class="header-actions">
+            <button class="btn-secondary">
+                <i class="fas fa-search"></i> Search
+            </button>
+            <button class="btn-primary">
+                <i class="fas fa-user"></i> My Account
+            </button>
+        </div>
+    </header>
+
+    <!-- Website Team Section -->
+    <section class="testimonials" id="team">
+        <div class="section-header">
+            <h2>Website Team</h2>
+            <p class="subtitle">Meet the developers behind the project</p>
+        </div>
+        <div class="testimonial-cards">
+            <div class="testimonial-card">
+                <div class="client-info">
+                    <img src="{{url_for('static',filename='images/aryan.jpeg')}}" alt="Aryan Thakur">
+                    <div>
+                        <h4>Aryan Thakur</h4>
+                        <span>2nd year, CSE, IIIT Nagpur</span>
+                    </div>
+                </div>
+                <p>Crafted the backend of the website using JavaScript, Firebase (Authentication, Database, AI) ,
+                    RestAPI, emailJS, python (Flask).</p>
+                <div class="social-buttons fade-in">
+                    <a href="https://www.linkedin.com/in/aryan-thakur-ba0999323/" target="_blank" class="social-btn linkedin"
+                        aria-label="LinkedIn" rel="noopener">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://www.instagram.com/the_official_thakur_aryan?igsh=MTRvdTJmaG9zc254" target="_blank" class="social-btn instagram"
+                        aria-label="Instagram" rel="noopener">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://github.com/ARYANatGIT" target="_blank" class="social-btn github" aria-label="GitHub"
+                        rel="noopener">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="client-info">
+                    <img src="{{url_for('static',filename='images/divyam.jpeg')}}" alt="Divyam Diwan">
+                    <div>
+                        <h4>Divyam Diwan</h4>
+                        <span>2nd year, CSE, IIIT Nagpur</span>
+                    </div>
+                </div>
+                <p>Contributed in the frontend of the website through HTML , CSS and JavaScript.</p>
+                <div class="social-buttons fade-in">
+                    <a href="https://www.linkedin.com/in/divyam-gupta-862542324/" target="_blank" class="social-btn linkedin"
+                        aria-label="LinkedIn" rel="noopener">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://www.instagram.com/divyam.diwan?igsh=M2JsZXVxajd1NWVv" target="_blank" class="social-btn instagram"
+                        aria-label="Instagram" rel="noopener">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://github.com/Divyam-Gupta2006" target="_blank" class="social-btn github" aria-label="GitHub"
+                        rel="noopener">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Experience the Magic?</h2>
+            <p>Book your home care service today and let our professionals handle the rest</p>
+            <button class="btn-primary btn-xl">
+                <i class="fas fa-magic"></i> Book Your Cleaning Now
+            </button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo-container">
+                    <img src="{{url_for('static',filename='images/Untitled design.png')}}" alt="Genie Logo" class="logo">
+                    <span class="company-name">Genie</span>
+                </div>
+                <p>Transforming homes with magical cleaning services since 2025</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <div class="link-column">
+                    <h3>Services</h3>
+                    <a href="/home-care">Home Care</a>
+                    <a href="/pet-care">Pet Care</a>
+                    <a href="/salon-at-home">Salon at Home</a>
+                    <a href="/party-planners">Party Planners</a>
+                    <a href="/house-repairs">House Repairs</a>
+                    <a href="/complete-event-care">Complete Event Care</a>
+                </div>
+
+                <div class="link-column">
+                    <h3>Company</h3>
+                    <a href="#">About Us</a>
+                    <a href="#">Website Team</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Press</a>
+                </div>
+
+                <div class="link-column">
+                    <h3>Support</h3>
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">FAQs</a>
+                    <a href="#">Safety Standards</a>
+                    <a href="#">Service Guarantee</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Genie Home Care Services. All rights reserved.</p>
+            <div class="legal-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

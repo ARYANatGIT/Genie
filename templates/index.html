@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genie</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/Untitled design.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='loading.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <div id="loading-screen">
+        <img id="loading-image" src="{{ url_for('static', filename='images/Untitled design.png') }}" alt="Loading...">
+        <div id="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+        <p>Loading...</p>
+    </div>
+
+    <div id="content">
+
+        <header>
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='images/Untitled design.png') }}" alt="Company Logo" class="logo">
+                <span class="company-name">Genie</span>
+            </div>
+
+            <div class="location-bar" onclick="redirectToPage(event)">
+                <img src="{{ url_for('static', filename='images/location-pin-svgrepo-com.svg')}}" alt="Location" class="location-btn">
+                <input type="text" placeholder="Enter your location" class="location-bar" id="location-input">
+                <ul id="suggestions"></ul>
+            </div>
+
+            <div class="search-container">
+                <img src="{{ url_for('static', filename='images/magnifying-glass-search-svgrepo-com.svg') }}" alt="Search" class="search-btn">
+
+                <div class="search-wrapper">
+                    <input type="text" class="search-bar" id="search-input" placeholder=" Search for services">
+                    <ul id="suggestions1"></ul>
+                </div>
+            </div>
+
+
+            <div class="header-buttons">
+                <a href="#" class="login-btn" id="cart-btn1" onclick="redirectToPage(event)"><img
+                        src="{{url_for('static', filename='images/cart-shopping-svgrepo-com.svg')}}" alt="My Cart" id="cart-btn"></a>
+                <a href="/signin-signup" class="login-btn"><img src="{{url_for('static',filename='images/profile-1341-svgrepo-com.svg')}}" alt="My Profile"
+                        id="profile-btn"></a>
+            </div>
+        </header>
+
+    </div>
+
+    <section class="services">
+
+        <button id="weather-button" class="floating-weather-button" title="Weather" onclick="redirectToPage(event)">
+            <i class="fas fa-cloud-sun"></i>
+        </button>
+
+
+        <button id="ai-button" class="floating-ai-button" title="Chat with AI">
+            <i class="fas fa-robot"></i>
+        </button>
+
+
+        <div id="ai-sidebar" class="ai-sidebar translate-x-full">
+            <button id="close-ai-sidebar" class="close-btn">&times;</button>
+            <div class="ai-content">
+                <h2>Chat with Genie AI</h2>
+
+                <div id="ai-chat-log" class="ai-chat-log"></div>
+
+                <form id="ai-prompt-form" class="ai-prompt-form">
+                    <input type="text" id="ai-prompt" placeholder="Type your message..." autocomplete="off" required />
+                    <button type="submit" title="Send Message"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Overlay -->
+        <div id="ai-overlay" class="overlay hidden"></div>
+
+        <div id="profile-sidebar" class="translate-x-full">
+            <div class="p-4">
+                <div class="flex justify-between items-center">
+                    <h2>Profile</h2>
+                    <button id="close-sidebar">&times;</button>
+                </div>
+                <div class="user-info">
+                    <div class="avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <p class="username">User Name</p>
+                    <p class="email">user@example.com</p>
+                </div>
+                <nav class="sidebar-menu">
+                    <button id="logout-button" class="menu-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Log Out
+                    </button>
+                    <a href="/delete-account" class="menu-item">
+                        <i class="fas fa-trash"></i>
+                        Delete account
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Overlay -->
+        <div id="sidebar-overlay" class="hidden"></div>
+
+        <h2>Our Services</h2>
+        <p>Find professionals for all your home service needs</p>
+
+        <div class="service-container">
+            <div class="service-card" id="Home-Care" onclick="redirectToPage(event)">
+                <div class="icon-placeholder">
+                    <img src="{{url_for('static',filename='images/profile-1341-svgrepo-com.svg')}}" alt="Home Care" class="icon-placeholder">
+                </div>
+                <div class="service-text">
+                    <h3>Home Care</h3>
+                    <p>Professional cleaning and household assistance</p>
+                </div>
+            </div>
+
+            <div class="service-card" id="Pet-Care" onclick="redirectToPage(event)">
+                <div class="icon-placeholder">
+                    <img src="{{url_for('static',filename='images/profile-1341-svgrepo-com.svg')}}" alt="Pet Care" class="icon-placeholder">
+                </div>
+                <div class="service-text">
+                    <h3>Pet Care</h3>
+                    <p>Grooming, sitting, and walking services for your pets</p>
+                </div>
+
+            </div>
+
+            <div class="service-card" id="Salon-at-Home" onclick="redirectToPage(event)">
+                <div class="icon-placeholder">
+                    <img src="{{url_for('static',filename='images/hair-salon-scissor-svgrepo-com.svg')}}" alt="Salon at Home" class="icon-placeholder">
+                </div>
+                <div class="service-text">
+                    <h3>Salon at Home</h3>
+                    <p>Beauty and grooming services in the comfort of your home</p>
+                </div>
+            </div>
+
+            <div class="service-card" id="Party-Planners" onclick="redirectToPage(event)">
+                <div class="icon-placeholder">
+                    <img src="{{url_for('static',filename='images/party-dj-svgrepo-com.svg')}}" alt="Party Planners" class="icon-placeholder">
+                </div>
+                <div class="service-text">
+                    <h3>Party Planners</h3>
+                    <p>Complete planning and organization for your special events</p>
+                </div>
+            </div>
+
+            <div class="service-card" id="House-Repairs" onclick="redirectToPage(event)">
+                <div class="icon-placeholder">
+                    <img src="{{url_for('static',filename='images/wrench-svgrepo-com.svg')}}" alt="House Repairs" class="icon-placeholder">
+                </div>
+                <div class="service-text">
+                    <h3>House Repairs</h3>
+                    <p>Electrical, plumbing, and general maintenance services</p>
+                </div>
+
+            </div>
+
+            <div class="service-card" id="Complete-Event-Care" onclick="redirectToPage(event)">
+                <div class="icon-placeholder">
+                    <img src="{{url_for('static',filename='images/calender-svgrepo-com.svg')}}" alt="Complete Event Care" class="icon-placeholder">
+                </div>
+                <div class="service-text">
+                    <h3>Complete Event Care</h3>
+                    <p>End-to-end services for events and celebrations</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div>
+        <img src="{{url_for('static',filename='images/full-length-shot-pretty-healthy-young-lady-walking-morning-park-with-dog_171337-18869-COLLAGE.jpg')}}"
+            alt="our services" id="services-image">
+    </div>
+
+    <!-- Home Care Section  -->
+    <div class="parent-services-container">
+        <div class="parent-services-container-image-text">
+            <img src="{{url_for('static',filename='images/home-11-svgrepo-com.svg')}}" alt="Home Care" class="parent-services-container-icon">
+            <h2>Home Care</h2>
+        </div>
+        <div class="services-container">
+            <div class="services-container-card" id="deep-home-cleaning" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/deep home cleaning.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Deep Home Cleaning</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$100</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="kitchen-and-bathroom-sanitization" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/kitchen and bathroom sanitization.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Kitchen and Bathroom Sanitization</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$40</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="sofa-and-carpet-shampooing" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/sofa and carpet shampooing.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Sofa and Carpet Shampooing</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$50</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="water-tank-cleaning" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/water tank cleaning.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Water Tank Cleaning</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$25</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="pest-control" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/pest control.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Pest Control (Cockroach/Termite/Bed Bugs)</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$60</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- pet care -->
+    <div class="parent-services-container">
+        <div class="parent-services-container-image-text">
+            <img src="{{url_for('static',filename='images/paw-svgrepo-com.svg')}}" alt="Pet Care" class="parent-services-container-icon">
+            <h2>Pet Care</h2>
+        </div>
+        <div class="services-container">
+
+            <div class="services-container-card" id="pet-grooming" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/pet grooming.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Pet Grooming (Bath, Haircut, Nail Trim)</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$25</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="dog-walking" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/dog walking.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Dog Walking Service</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$5</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="pet-sitting" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/pet sitting.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Pet Sitting (Daycare/Overnight)</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$30</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="veterinary-home-visit" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/veterinary home visit.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Veterinary Home Visit</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$40</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="pet-training" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/pet training.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Pet Training Session</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$30</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- salon at home  -->
+    <div class="parent-services-container">
+        <div class="parent-services-container-image-text">
+            <img src="{{url_for('static',filename='images/hair-salon-scissor-svgrepo-com.svg')}}" alt="Salon at Home" class="parent-services-container-icon">
+            <h2>Salon at Home</h2>
+        </div>
+        <div class="services-container">
+
+            <div class="services-container-card" id="haircut-and-hair-styling" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/haircut and hair styling.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Haircut and Hair Styling</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$6</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="facial-and-clean-up" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/facial and clean up.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Facial and Clean-Up Services</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$18</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="waxing-and-threading" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/waxing and threading.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Waxing and Threading</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$18</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="menicure-and-pedicure" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/menicure and pedicure.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Manicure and Pedicure</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$6</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="bridal-make-up" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/bridal make up.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Bridal Makeup and Pre-Bridal Package</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$120</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- party planners  -->
+    <div class="parent-services-container">
+        <div class="parent-services-container-image-text">
+            <img src="{{url_for('static',filename='images/party-dj-svgrepo-com.svg')}}" alt="Party Planners" class="parent-services-container-icon">
+            <h2>Party Planners</h2>
+        </div>
+        <div class="services-container">
+
+            <div class="services-container-card" id="birthday-theme" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/birthday theme.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Birthday Theme Decoration</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$120</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="balloon-decoration" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/balloon decoration.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Balloon Decoration & Setups</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$80</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="dj-and-music" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/dj and music.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">DJ & Music Arrangement</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$80</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="return-gifts" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/return gifts.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Return Gifts and Party Supplies</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$5</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="games-coordinator" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/games coordinator.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Games Coordinator/Host</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$80</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- house repairs  -->
+    <div class="parent-services-container">
+        <div class="parent-services-container-image-text">
+            <img src="{{url_for('static',filename='images/wrench-svgrepo-com.svg')}}" alt="House Repairs" class="parent-services-container-icon">
+            <h2>House Repairs</h2>
+        </div>
+        <div class="services-container">
+
+            <div class="services-container-card" id="electrical-repairs" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/electrical repairs.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Electrical Repairs</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$9</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="plumbing-service" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/plumbing service.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Plumbing Services</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$12</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="carpenter-services" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/carpenter services.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Carpenter Services</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$30</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="appliance-repair" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/appliance repair.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Appliance Repair</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$30</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="wall-painting" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/wall painting.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Wall Painting & Touch-Ups</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$5</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- complete event care  -->
+    <div class="parent-services-container">
+        <div class="parent-services-container-image-text">
+            <img src="{{url_for('static',filename='images/calender-svgrepo-com.svg')}}" alt="Complete Event Care" class="parent-services-container-icon">
+            <h2>Complete Event Care</h2>
+        </div>
+        <div class="services-container">
+
+            <div class="services-container-card" id="venue-booking" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/venue booking.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Venue Booking & Management</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$1800</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="catering" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/catering.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Catering & Menu Planning</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$18</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="lighting" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/lighting.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Lighting and Sound Setup</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$1200</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="guest-management" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/guest management.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Guest Management and RSVP</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$600</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+
+            <div class="services-container-card" id="event-photography" onclick="redirectToPage(event)">
+                <img src="{{url_for('static',filename='images/event photography.jpg')}}" alt="House Cleaning" class="services-container-image">
+
+                <h3 class="service-title">Event Photography & Videography</h3>
+
+                <div class="service-info">
+                    <p class="price-tag">$1200</p>
+                    <button class="services-container-add-to-cart-btn">
+                        <img src="{{url_for('static',filename='images/add-to-cart-svgrepo-com.svg')}}" alt="Add to Cart">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo-container">
+                    <img src="{{url_for('static',filename='images/Untitled design.png')}}" alt="Genie Logo" class="logo">
+                    <span class="company-name">Genie</span>
+                </div>
+                <p>Complete home services since 2025</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <div class="link-column">
+                    <h3>Services</h3>
+                    <a href="/home-care">Home Care</a>
+                    <a href="/pet-care">Pet Care</a>
+                    <a href="/salon-at-home">Salon at Home</a>
+                    <a href="/party-planners">Party Planners</a>
+                    <a href="/house-repairs">House Repairs</a>
+                    <a href="/complete-event-care">Complete Event Care</a>
+                </div>
+
+                <div class="link-column">
+                    <h3>Company</h3>
+                    <a class="protected" href="/coming-soon">About Us</a>
+                    <a class="protected" href="/website-team">Website Team</a>
+                    <a class="protected" href="/coming-soon">Careers</a>
+                    <a class="protected" href="/coming-soon">Blog</a>
+                    <a class="protected" href="/coming-soon">Press</a>
+                </div>
+
+                <div class="link-column">
+                    <h3>Support</h3>
+                    <a class="protected" href="/coming-soon">Help Center</a>
+                    <a href="/contact">Contact Us</a>
+                    <a class="protected" href="/coming-soon">FAQs</a>
+                    <a class="protected" href="/coming-soon">Safety Standards</a>
+                    <a class="protected" href="/coming-soon">Service Guarantee</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Genie Services. All rights reserved.</p>
+            <div class="legal-links">
+                <a class="protected" href="/coming-soon">Privacy Policy</a>
+                <a class="protected" href="/coming-soon">Terms of Service</a>
+                <a class="protected" href="/coming-soon">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="{{ url_for('static', filename='loading.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='firebase-config.js') }}"></script>
+
+    <!-- Writing,rewriting animation for location search box and searching cities through GeoDB RapidAPI -->
+    <script>
+        const input = document.getElementById("location-input");
+        const suggestions = document.getElementById("suggestions");
+        const texts = ["New Delhi", "Chandigarh", "Jaipur", "Lucknow", "Mumbai", "Manali", "Bengaluru", "Hyderabad"];
+        let i = 0, j = 0, isDeleting = false;
+
+        function type() {
+            let current = texts[i];
+            input.placeholder = current.substring(0, j);
+
+            if (!isDeleting && j < current.length) {
+                j++;
+                setTimeout(type, 100);
+            } else if (isDeleting && j > 0) {
+                j--;
+                setTimeout(type, 50);
+            } else {
+                isDeleting = !isDeleting;
+                if (!isDeleting) i = (i + 1) % texts.length;
+                setTimeout(type, 1000);
+            }
+        }
+
+        type();
+
+        let debounceTimer;
+
+        input.addEventListener("input", async () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                fetchCities(input.value.trim());
+            }, 500);
+        });
+
+        async function fetchCities(query) {
+            if (query.length == 0) {
+                suggestions.innerHTML = "";
+                return;
+            }
+
+            try {
+                const res = await fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix=${encodeURIComponent(query)}&limit=5`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'X-RapidAPI-Key': 'a8a4a12bf6mshd1c211c2b5654b0p1d5218jsnbbef79cb0f3e',
+                            'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com'
+                        }
+                    }
+                );
+                const responseData = await res.json();
+                const cities = responseData.data;
+
+                suggestions.innerHTML = "";
+
+                if (!Array.isArray(cities)) {
+                    suggestions.innerHTML = "<li>No results found</li>";
+                }
+
+                cities.forEach(city => {
+                    const li = document.createElement("li");
+                    li.textContent = `${city.city} ${city.country}`;
+                    li.style.cursor = "pointer";
+                    li.style.padding = "5px";
+                    li.addEventListener("click", () => {
+                        input.value = `${city.city} ${city.country}`;
+                        suggestions.innerHTML = "";
+                    });
+                    suggestions.appendChild(li);
+                });
+            } catch (err) {
+                console.log("GeoDB API error: ", err);
+                suggestions.innerHTML = "<li>Error loading cities...</li>";
+            }
+        }
+    </script>
+
+    <!-- Writing,rewriting animation for services search box and searching manually through json file-->
+    <script>
+        const input1 = document.getElementById("search-input");
+        const texts1 = ["Home Care", "Pet Care", "Salon at Home", "Party Planners", "House Repairs", "Complete Event Care"];
+        let i1 = 0, j1 = 0, isDeleting1 = false;
+
+        function type1() {
+            let current1 = texts1[i1];
+            input1.placeholder = current1.substring(0, j1);
+
+            if (!isDeleting1 && j1 < current1.length) {
+                j1++;
+                setTimeout(type1, 100);
+            } else if (isDeleting1 && j1 > 0) {
+                j1--;
+                setTimeout(type1, 50);
+            } else {
+                isDeleting1 = !isDeleting1;
+                if (!isDeleting1) i1 = (i1 + 1) % texts1.length;
+                setTimeout(type1, 1000);
+            }
+        }
+
+        type1();
+
+        let services = [];
+        fetch('/static/services.json')
+            .then(res => res.json())
+            .then(data => {
+                services = data;
+            });
+
+        const searchInput = document.getElementById('search-input');
+        const suggestionsBox = document.getElementById('suggestions1');
+
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase().trim();
+            suggestionsBox.innerHTML = "";
+
+            if (query.length == 0) {
+                suggestionsBox.innerHTML = "";
+                return;
+            }
+
+            const matches = services.filter(service =>
+                service.name.toLowerCase().includes(query)
+            );
+
+            matches.forEach(service => {
+                const li1 = document.createElement('li');
+                li1.textContent = `${service.name}`;
+                li1.addEventListener('click', () => {
+
+                    const serviceName = service.name.toLowerCase();
+
+                    if (serviceName === "home care") {
+                        window.location.href = "/home-care";
+                    }
+                    else if (serviceName === "pet care") {
+                        window.location.href = "/pet-care";
+                    }
+                    else if (serviceName === "salon at home") {
+                        window.location.href = "/salon-at-home";
+                    }
+                    else if (serviceName === "party planners") {
+                        window.location.href = "/party-planners";
+                    }
+                    else if (serviceName === "house repairs") {
+                        window.location.href = "/house-repairs";
+                    }
+                    else if (serviceName === "complete event care") {
+                        window.location.href = "/complete-event-care";
+                    }
+                });
+                suggestionsBox.appendChild(li1);
+            });
+        });
+    </script>
+
+    <script>
+        document.querySelectorAll('.protected').forEach(link => {
+            link.onclick = function () {
+                const target = link.getAttribute('href');
+                sessionStorage.setItem('allowcomingsoon', 'true');
+                // Let the browser handle the navigation, but delay it just enough
+                setTimeout(() => {
+                    window.location.href = target;
+                }, 10); // 10ms delay is usually enough
+
+                return false; // Optional: to ensure delay works reliably
+            };
+        });
+    </script>
+</body>
+
+</html>
+
